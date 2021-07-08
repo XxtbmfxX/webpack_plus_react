@@ -3,8 +3,20 @@
 //El objeto toma la accion y evalua como lo guarda en el estado
 
 //payload-->carga util
-//uso de parentesis
+
+export const actions = {
+    setFavorite: 'SET_FAVORITE',
+    deleteFavorite: 'DELETE_FAVORITE'
+}
+
 export const setFavorite = payload => ({
-    type: 'SET_FAVORITE', //lo que hacemos en SNAKE_CASE
+    type: actions.setFavorite, //lo que hacemos en SNAKE_CASE
     payload
 });
+
+//funciones que retornan un objeto
+
+export const deleteFavorite = payload => ({
+    type: actions.deleteFavorite,
+    payload,
+})

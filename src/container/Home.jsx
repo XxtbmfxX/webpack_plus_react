@@ -21,7 +21,12 @@ const Home = ( { myList, trends, originals } ) => { //viene desde store
             {myList.length > 0 && (
             <Categories title='Mi Lista'>
                 <Carrusell>
-                    {myList.map((item) => <CarrusellItem key={item.id} {...item} />)}
+                        {myList.map((item) =>
+                            <CarrusellItem
+                                key={item.id}
+                                {...item}
+                                isList
+                            />)}
                 </Carrusell>
             </Categories>
         )}
