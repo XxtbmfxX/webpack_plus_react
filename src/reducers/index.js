@@ -7,8 +7,8 @@ const reducer = (state, action) => {
     switch (action.type) { //evaluar el type (hecho en actions)
 
         case actions.setFavorite: //caso particular
-            const exist = state.myList.find(item => item.id === action.payload.id)
-            if (exist) {
+            const exist = state.myList.find(item => item.id === action.payload.id) //search if its on myList
+            if (exist) {//if exist return state with no changes
                 return { ...state }
             }
             return {
@@ -21,6 +21,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 myList: state.myList.filter(items => items.id !== action.payload)
+            }
+        case actions.loginRequest:
+            return{
+                ...state,
+                user:action.payload,
             }
         default:
             return state //lo retornamos como llego
