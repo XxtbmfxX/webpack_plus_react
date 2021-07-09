@@ -1,17 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-
-import gravatar from "../utils/gravatar";
+import { logoutRequest } from "../actions";
 
 import '../styles/components/Header.scss';
 
 import logo from '../assets/static/logo-platzi-video-BW2.png';
 import userIcon from '../assets/static/user-icon.png';
 
+import gravatar from "../utils/gravatar";
+
 const Header = (props) => {
   const { user } = props;
   const hasUser = Object.keys(user).length > 0;
+
+  const handleLogout = () => {
+    props.logoutRequest({}) //solo de simulacion 
+  }
+
   return (
     <header className="header">
       
@@ -25,19 +31,24 @@ const Header = (props) => {
             <img src={gravatar(user.email)} alt={user.email} /> :
             <img src={userIcon} alt="" />
           }
-          {hasUser ?
-            <p>{ user.email.slice(0, -9) }</p> :
             <p>Perfil</p>
-          }
         </div>
-        
-          <ul>
-            <li> <Link to="/" >Cuenta</Link> </li>
+        <ul>
+          {hasUser ?
+            <li> <Link to="/" > {user.name} </Link> </li>
+            :null
+          }
+
+          {hasUser ?
+            <li> <a href="#logout" onClick={handleLogout} >cerrar sesion</a> </li>:
             <li> <Link to="/login" >Iniciar sesion</Link> </li>
-            
-          </ul>
-            
-      </div>
+          }
+          {hasUser ?
+            null:
+            <li> <Link to="/register" >registrarse</Link> </li>
+          }
+        </ul>
+        </div>
     </header>
   
   )
@@ -49,4 +60,9 @@ const mapStateToProps = state => {
     user: state.user,
   }
 }
-export default connect(mapStateToProps,null)(Header)
+
+const mapDispatchToProps = {
+  logoutRequest,
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
