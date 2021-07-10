@@ -6,7 +6,7 @@ que tendra la info de la store, trasnmitida a los componentes*/
 import { Provider } from "react-redux";
 
 /* Logica para compartir informacion en la App*/
-import { createStore } from "redux";
+import { createStore, compose } from "redux";
 
 import reducer from "./reducers"
 
@@ -44,7 +44,7 @@ const initialState = {
         "duration": 137,
         "cover": "http://dummyimage.com/800x600.png/302140/ffffff",
         "description": "Vestibulum ac est lacinia nisi venenatis tristique",
-        "source": "https://mdstrm.com/video/58333e214ad055d208427db5.mp4"
+        "source": "https://youtu.be/dQw4w9WgXcQ"
     },
     {
         "id": 4,
@@ -183,7 +183,9 @@ const initialState = {
 
 }
 
-const store = createStore(reducer, initialState) //creamos nuestra store ("state global")
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
+const store = createStore(reducer, initialState, composeEnhancers()) //creamos nuestra store ("state global")
 
 ReactDom.render(
     <Provider store={store} > {/*ahora toda la App tiene acceso a los datos iniciales*/}

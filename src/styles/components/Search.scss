@@ -1,10 +1,17 @@
-.main {
+.main_home {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   height: 300px;
   border-radius: 0px 0px 40px 40px;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+.main_home,
+.isHome {
+  width: 70%;
 }
 
 .main__title {

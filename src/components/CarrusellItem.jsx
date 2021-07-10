@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux' //conectar estado <--> componente
 import { setFavorite, deleteFavorite } from '../actions'
 
+import { Link } from 'react-router-dom';
+
 import "../styles/components/CarrusellItem.scss";
 
 
@@ -30,7 +32,14 @@ const CarrusellItem = ( props ) => {
       <div className="carousel-item__details">
 
         <div>
-          <img className="carousel-item__details--img" src={play} alt="Play Icon" />
+          <Link to={`/player/${id}`}>
+            <img
+              className="carousel-item__details--img"
+              src={play}
+              alt="Play Icon"
+            />
+          </Link>
+
           {isList ? 
             <img className="carousel-item__details--img"
               src={removeIcon}
