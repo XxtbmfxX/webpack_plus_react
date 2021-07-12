@@ -44,6 +44,17 @@ const reducer = (state, action) => {
                 || state.originals.find(item => item.id === Number(action.payload))
                 ||[],
             }
+        case actions.getVideoSearch:
+            if (action.payload === "") {
+                return{ ...state, searchResult: [] }
+            }
+            const list = [...state.trends, ...state.originals]
+            return {
+                ...state,
+                searchResult:
+                list.filter(item => item.title.toLowerCase().includes(action.payload.toLowerCase()))
+            }
+        /* filtra en mi lista de trends-originals el titulo a LOWERCASE y si incluye el payload en LOWERCASE se agregara al searchResult * */
         default:
             return state //lo retornamos como llego
     }

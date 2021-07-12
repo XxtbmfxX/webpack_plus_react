@@ -11,13 +11,23 @@ import CarrusellItem from "../components/CarrusellItem";
 
 import "../styles/Home.scss";
 
-const Home = ({ myList, trends, originals }) => {
+const Home = ({ myList, trends, originals, searchResult }) => {
   //viene desde store
 
   return (
     <React.Fragment>
       <Header />
       <Search isHome />
+
+      {searchResult.length > 0 && (
+        <Categories title="Resultados de la busqueda...">
+          <Carrusell>
+            {searchResult.map((item) => (
+              <CarrusellItem key={item.id} {...item} />
+            ))}
+          </Carrusell>
+        </Categories>
+      )}
 
       {myList.length > 0 && (
         <Categories title="Mi Lista">
@@ -55,6 +65,7 @@ const mapStateToProps = (state) => {
     myList: state.myList,
     trends: state.trends,
     originals: state.originals,
+    searchResult: state.searchResult,
   };
 };
 
